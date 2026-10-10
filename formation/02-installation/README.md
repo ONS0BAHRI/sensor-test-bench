@@ -2,7 +2,7 @@
 
 # Module 2 · Installation et première campagne
 
-**Statut :** à faire
+**Statut :** terminé
 
 À la fin de ce module, les 44 tests automatiques passent sur votre PC et vous avez ouvert votre premier rapport de campagne.
 
@@ -87,14 +87,36 @@ Le dossier `reports/` est ignoré par Git : ce sont des résultats générés, p
 
 ## Vos résultats
 
-> **À compléter :** ajoutez une capture de votre terminal après `pytest` et après `python run_bench.py` dans `images/`.
+Installation sous Windows 11, Python 3.12.6 (numpy 2.5, scipy 1.18, matplotlib 3.11, pytest 9.1).
+
+| Étape | Résultat |
+|---|---|
+| `pytest` | **44 tests réussis** (12 banc, 17 protocole série, 15 traitement du signal) |
+| `python run_bench.py` | **OK · capteur conforme**, 12/12 tests, 3,5 s |
+| `python run_bench.py --defective` | **KO · capteur non conforme**, 3 échecs : T02, T03, T05 |
+
+![pytest : 44 tests réussis](images/pytest.png)
+
+![Campagne sur un capteur conforme](images/campagne_ok.png)
+
+![Campagne sur un capteur défectueux](images/campagne_ko.png)
+
+**Pourquoi le capteur défectueux est rejeté :**
+
+| Test | Mesure du capteur défectueux | Critère | Capteur conforme |
+|---|---|---|---|
+| T02 Offset | offset brut X = 0,210 g | ≤ 0,15 g | 0,035 g |
+| T03 Bruit | écart-type 13,0 mg, SNR 37,6 dB | ≤ 10 mg et ≥ 40 dB | 4,0 mg, 47,8 dB |
+| T05 Hystérésis | écart montée/descente 57,6 mg | ≤ 20 mg | 14,4 mg |
+
+Les autres tests passent : un capteur défectueux n'est pas mauvais partout, d'où l'intérêt d'une campagne complète.
 
 ## Checklist
 
-- [ ] `pytest` affiche 44 tests réussis
-- [ ] Campagne normale : verdict OK, rapport ouvert
-- [ ] Campagne `--defective` : verdict KO
-- [ ] Captures ajoutées
+- [x] `pytest` affiche 44 tests réussis
+- [x] Campagne normale : verdict OK, rapport ouvert
+- [x] Campagne `--defective` : verdict KO
+- [x] Captures ajoutées
 
 ---
 

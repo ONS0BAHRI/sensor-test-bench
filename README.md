@@ -24,8 +24,8 @@ Le banc stimule le capteur avec des grandeurs connues (inclinaison par servomote
 
 | Module | Contenu | Matériel | Statut |
 |---|---|---|---|
-| [1 · Introduction](formation/01-introduction/README.md) | Principe d'un banc de test, architecture SIL / HIL, vocabulaire | Aucun | à faire |
-| [2 · Installation](formation/02-installation/README.md) | Environnement Python, 44 tests, première campagne | Aucun | à faire |
+| [1 · Introduction](formation/01-introduction/README.md) | Principe d'un banc de test, architecture SIL / HIL, vocabulaire | Aucun | terminé |
+| [2 · Installation](formation/02-installation/README.md) | Environnement Python, 44 tests, première campagne | Aucun | terminé |
 | [3 · Simulateur](formation/03-simulateur/README.md) | Interface commune, modèle physique et ses imperfections | Aucun | à faire |
 | [4 · Traitement du signal](formation/04-traitement-du-signal/README.md) | Filtres, FFT, enveloppe, régression, tests unitaires | Aucun | à faire |
 | [5 · Tests du capteur](formation/05-tests-du-capteur/README.md) | 13 travaux pratiques, détaillés ci-dessous | Aucun, puis banc | à faire |

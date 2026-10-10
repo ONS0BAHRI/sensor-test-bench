@@ -2,7 +2,7 @@
 
 # Module 1 · Introduction
 
-**Statut :** à faire
+**Statut :** terminé
 
 Ce module présente ce que vous allez construire, le principe d'un banc de test de capteur et le vocabulaire utilisé dans toute la formation.
 
@@ -93,9 +93,9 @@ Un faux négatif (accepter un mauvais capteur) coûte beaucoup plus cher qu'un f
 
 ## Checklist
 
-- [ ] J'ai compris le principe stimulus → mesure → comparaison → verdict
-- [ ] Je sais expliquer la différence entre SIL et HIL
-- [ ] Je connais les termes du tableau de vocabulaire
+- [x] J'ai compris le principe stimulus → mesure → comparaison → verdict
+- [x] Je sais expliquer la différence entre SIL et HIL
+- [x] Je connais les termes du tableau de vocabulaire
 
 ---
 
