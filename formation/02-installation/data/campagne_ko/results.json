@@ -1,0 +1,156 @@
+{
+  "meta": {
+    "run_id": "20261010-140723_sil_SIM-DEFECT",
+    "started_at": "2026-10-10 14:07:23",
+    "mode": "sil",
+    "serial_number": "SIM-DEFECT",
+    "firmware": "simulateur-1.0",
+    "git_commit": "f23865c",
+    "duration_s": 3.7461490631103516
+  },
+  "results": [
+    {
+      "id": "T01",
+      "title": "Communication I2C",
+      "verdict": "OK",
+      "criterion": "WHO_AM_I = 0x68",
+      "measures": {
+        "WHO_AM_I": "0x68"
+      }
+    },
+    {
+      "id": "T02",
+      "title": "Offset et calibration",
+      "verdict": "KO",
+      "criterion": "|offset brut| ≤ 0.15 g et |résidu| ≤ 0.05 g",
+      "measures": {
+        "offset brut X (g)": 0.209624755859375,
+        "offset brut Y (g)": -0.02105731201171875,
+        "offset brut Z (g)": 0.04543750000000002,
+        "résidu X après calibration (g)": 0.0006026611328124876,
+        "résidu Y après calibration (g)": 0.000518798828125,
+        "résidu Z après calibration (g)": -0.0006082763671875213
+      }
+    },
+    {
+      "id": "T03",
+      "title": "Bruit au repos",
+      "verdict": "KO",
+      "criterion": "écart-type ≤ 10 mg et SNR ≥ 40 dB",
+      "measures": {
+        "écart-type ax (mg)": 13.037175773958717,
+        "écart-type ay (mg)": 13.181926677136238,
+        "écart-type az (mg)": 13.012645834959343,
+        "SNR pour 1 g (dB)": 37.600422167987155
+      }
+    },
+    {
+      "id": "T04",
+      "title": "Linéarité",
+      "verdict": "OK",
+      "criterion": "R² ≥ 0.99 et erreur ≤ 2.0 % PE",
+      "measures": {
+        "R²": 0.9998435164669492,
+        "erreur max (% PE)": 0.28946412572389835,
+        "gain mesuré": 1.0337163429384006,
+        "offset mesuré (g)": 0.18030338871335005
+      }
+    },
+    {
+      "id": "T05",
+      "title": "Hystérésis",
+      "verdict": "KO",
+      "criterion": "écart montée/descente ≤ 20 mg",
+      "measures": {
+        "écart max (mg)": 57.58691406249999,
+        "à l'angle (°)": 0
+      }
+    },
+    {
+      "id": "T06",
+      "title": "Répétabilité",
+      "verdict": "OK",
+      "criterion": "écart-type sur 10 cycles ≤ 10 mg",
+      "measures": {
+        "écart-type (mg)": 0.6695223705445222,
+        "étendue (mg)": 2.0657958984374725
+      }
+    },
+    {
+      "id": "T07",
+      "title": "Réponse en fréquence (FFT)",
+      "verdict": "OK",
+      "criterion": "pic FFT à ± 1.0 Hz de la fréquence commandée",
+      "measures": {
+        "5 Hz commandé -> mesuré (Hz)": 5.000896793344632,
+        "10 Hz commandé -> mesuré (Hz)": 9.99564683055225,
+        "20 Hz commandé -> mesuré (Hz)": 20.001660074275897,
+        "40 Hz commandé -> mesuré (Hz)": 39.99676795557655,
+        "erreur max (Hz)": 0.004353169447750105
+      }
+    },
+    {
+      "id": "T08",
+      "title": "Temps de réponse",
+      "verdict": "OK",
+      "criterion": "temps d'établissement à 5 % ≤ 500 ms",
+      "measures": {
+        "temps de montée 10-90 % (ms)": 53.99799999999999,
+        "temps d'établissement (ms)": 65.98899999999999,
+        "dépassement (%)": 1.2460060457027744
+      }
+    },
+    {
+      "id": "T09",
+      "title": "Validation du filtre passe-bas",
+      "verdict": "OK",
+      "criterion": "bruit réduit ≥ 50 % et niveau décalé ≤ 1.0 %",
+      "measures": {
+        "bruit brut (mg)": 12.790266697880657,
+        "bruit filtré (mg)": 3.103398643591723,
+        "réduction du bruit (%)": 75.73624759438398,
+        "décalage du niveau (%)": 0.002897650840484624
+      }
+    },
+    {
+      "id": "T10",
+      "title": "Fréquence d'échantillonnage réelle",
+      "verdict": "OK",
+      "criterion": "écart ≤ 5.0 % et gigue ≤ 5.0 %",
+      "measures": {
+        "fréquence nominale (Hz)": 500.0,
+        "fréquence mesurée (Hz)": 499.99687345626904,
+        "écart (%)": 0.0006253087461914219,
+        "gigue (%)": 1.0072936495292335
+      }
+    },
+    {
+      "id": "T12",
+      "title": "Robustesse aux erreurs",
+      "verdict": "OK",
+      "criterion": "chaque erreur est signalée proprement, sans plantage",
+      "measures": {
+        "angle hors plage (200°)": "OK : ValueError",
+        "acquisition de 0 point": "OK : ValueError",
+        "commande série inconnue": "OK : SensorError",
+        "capteur débranché": "OK : SensorError",
+        "banc toujours opérationnel après les erreurs": "OK"
+      }
+    },
+    {
+      "id": "T13",
+      "title": "Détection de défauts injectés",
+      "verdict": "OK",
+      "criterion": "100 % des défauts détectés, 0 fausse alarme",
+      "measures": {
+        "défaut pic": "détecté",
+        "défaut saturation": "détecté",
+        "défaut fige": "détecté",
+        "défaut derive": "détecté",
+        "défaut bruit_fort": "détecté",
+        "taux de détection (%)": 100.0,
+        "fausses alarmes sur signal sain": "aucune"
+      }
+    }
+  ]
+}

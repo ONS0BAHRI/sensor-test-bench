@@ -92,7 +92,7 @@ Installation sous Windows 11, Python 3.12.6 (numpy 2.5, scipy 1.18, matplotlib 3
 | Étape | Résultat |
 |---|---|
 | `pytest` | **44 tests réussis** (12 banc, 17 protocole série, 15 traitement du signal) |
-| `python run_bench.py` | **OK · capteur conforme**, 12/12 tests, 3,5 s |
+| `python run_bench.py` | **OK · capteur conforme**, 12/12 tests, 3,3 s |
 | `python run_bench.py --defective` | **KO · capteur non conforme**, 3 échecs : T02, T03, T05 |
 
 ![pytest : 44 tests réussis](images/pytest.png)
@@ -106,10 +106,17 @@ Installation sous Windows 11, Python 3.12.6 (numpy 2.5, scipy 1.18, matplotlib 3
 | Test | Mesure du capteur défectueux | Critère | Capteur conforme |
 |---|---|---|---|
 | T02 Offset | offset brut X = 0,210 g | ≤ 0,15 g | 0,035 g |
-| T03 Bruit | écart-type 13,0 mg, SNR 37,6 dB | ≤ 10 mg et ≥ 40 dB | 4,0 mg, 47,8 dB |
-| T05 Hystérésis | écart montée/descente 57,6 mg | ≤ 20 mg | 14,4 mg |
+| T03 Bruit | écart-type 13,0 mg, SNR 37,6 dB | ≤ 10 mg et ≥ 40 dB | 3,9 mg, 48,0 dB |
+| T05 Hystérésis | écart montée/descente 57,6 mg | ≤ 20 mg | 13,9 mg |
 
 Les autres tests passent : un capteur défectueux n'est pas mauvais partout, d'où l'intérêt d'une campagne complète.
+
+**Données des deux campagnes** (rapport HTML à télécharger puis ouvrir dans un navigateur, tableau de résultats, graphiques, CSV bruts) :
+
+| Campagne | Rapport | Résumé | Graphiques | Données brutes |
+|---|---|---|---|---|
+| Capteur conforme | [report.html](data/campagne_ok/report.html) | [summary.md](data/campagne_ok/summary.md) | [figures/](data/campagne_ok/figures) | [raw/](data/campagne_ok/raw) |
+| Capteur défectueux | [report.html](data/campagne_ko/report.html) | [summary.md](data/campagne_ko/summary.md) | [figures/](data/campagne_ko/figures) | [raw/](data/campagne_ko/raw) |
 
 ## Checklist
 
