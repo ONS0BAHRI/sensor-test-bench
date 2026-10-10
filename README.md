@@ -11,6 +11,8 @@ Le banc stimule le capteur avec des grandeurs connues (inclinaison par servomote
 
 ![Une campagne sur un capteur conforme, puis sur un capteur défectueux](assets/campagne_terminal.png)
 
+> **Mes résultats** (simulation et matériel) : voir la branche [`mes-essais`](https://github.com/ONS0BAHRI/sensor-test-bench/tree/mes-essais). La branche `main` reste la formation vierge, à cloner pour refaire les TP.
+
 ## Ce que vous allez apprendre
 
 - Concevoir un test de capteur : stimulus de référence, méthode, critère d'acceptation.
