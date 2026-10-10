@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+# rapports générés à chaque campagne (un exemple est gardé dans docs/)
+reports/

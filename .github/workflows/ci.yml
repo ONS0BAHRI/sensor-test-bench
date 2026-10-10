@@ -1,0 +1,31 @@
+name: Tests du banc (simulation)
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  sil:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+      - name: Tests unitaires et tests système (mode SIL)
+        run: pytest --html=reports/pytest_report.html --self-contained-html
+      - name: Campagne complète sur capteur simulé
+        run: python run_bench.py --mode sil
+      - name: Le banc doit rejeter un capteur défectueux
+        run: |
+          if python run_bench.py --mode sil --defective; then
+            echo "Le capteur défectueux a été accepté : le banc ne fait pas son travail" && exit 1
+          fi
+      - name: Publier les rapports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapports-de-test
+          path: reports/

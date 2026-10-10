@@ -1,0 +1,68 @@
+# Seuils et paramètres du banc de test.
+# Changer un critère ne demande jamais de modifier le code.
+# Valeurs de départ pour un MPU6050 en ±2 g : à ajuster après les premières mesures réelles,
+# en notant la raison du changement dans le README.
+
+acquisition:
+  settle_s: 0.4          # attente après un mouvement du servo avant de mesurer
+  n_static: 500          # échantillons par point statique (1 s à 500 Hz)
+
+T01_communication:
+  who_am_i: 0x68
+
+T02_offset:
+  n: 1000
+  max_raw_offset_g: 0.15      # offset brut toléré avant calibration (datasheet : ±50 à ±80 mg)
+  max_residual_g: 0.05        # offset résiduel après calibration
+
+T03_bruit:
+  n: 2000
+  max_std_g: 0.010
+  min_snr_db: 40
+
+T04_linearite:
+  angles_deg: [0, 10, 20, 30, 40, 50, 60]
+  min_r2: 0.99
+  max_error_pct_fs: 2.0       # % de la pleine échelle (2 g)
+  full_scale_g: 2.0
+
+T05_hysteresis:
+  angles_deg: [0, 10, 20, 30, 40, 50, 60]
+  max_gap_g: 0.02
+
+T06_repetabilite:
+  cycles: 10
+  angle_deg: 30
+  max_std_g: 0.010
+
+T07_frequence:
+  frequencies_hz: [5, 10, 20, 40]
+  n: 2000
+  envelope_fc_hz: 60
+  max_error_hz: 1.0
+
+T08_reponse:
+  angle_deg: 45
+  n: 1000
+  filter_fc_hz: 20
+  tolerance: 0.05
+  max_settling_s: 0.5
+
+T09_filtre:
+  angle_deg: 30
+  n: 2000
+  fc_hz: 20
+  min_noise_reduction_pct: 50
+  max_mean_shift_pct: 1.0
+
+T10_echantillonnage:
+  n: 2000
+  max_rate_error_pct: 5.0
+  max_jitter_pct: 5.0
+
+T13_defauts:
+  n: 2000
+  spike_z: 8.0
+  stuck_run: 50
+  drift_max_g_per_s: 0.01
+  noise_max_g: 0.02
