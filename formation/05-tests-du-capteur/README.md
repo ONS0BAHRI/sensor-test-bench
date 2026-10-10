@@ -47,6 +47,30 @@ python run_bench.py --mode hil --port COM3 --docs       # images/hil.png dans ch
 python run_bench.py --defective --docs                  # images/defectueux.png
 ```
 
+## Déposer ses résultats après un TP
+
+Chaque dossier `TPxx-nom/` contient trois sous-dossiers :
+
+| Dossier | Contenu | Exemple de nom |
+|---|---|---|
+| `images/` | Graphiques et photos du montage | `sil.png`, `hil.png`, `montage.jpg` |
+| `videos/` | Courtes vidéos de l'essai (MP4, moins de 50 Mo) | `essai_hil.mp4` |
+| `data/` | Données brutes et résumés de campagne | `sil.csv`, `hil.csv`, `summary.md` |
+
+Une fois le TP fait en simulation puis sur le matériel :
+
+1. Copier les graphiques, vidéos et CSV dans les sous-dossiers du TP.
+2. Remplir la section « Vos résultats sur le vrai capteur » et passer le **Statut** à « fait ».
+3. Pousser :
+
+```bash
+git add formation/05-tests-du-capteur/TPxx-nom
+git commit -m "TPxx : résultats simulation et matériel"
+git push
+```
+
+GitHub refuse les fichiers de plus de 100 Mo : compresser les vidéos ou les publier ailleurs et mettre le lien dans la fiche.
+
 ## Ajouter un nouveau TP
 
 Copiez [`_modele-tp.md`](_modele-tp.md) dans un nouveau dossier `TPxx-nom/`, écrivez la procédure dans `bench/procedures.py`, ses seuils dans `config/limits.yaml`, son graphique dans `report/plots.py`, puis déclarez le dossier dans `report/course.py`.

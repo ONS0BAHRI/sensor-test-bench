@@ -1,4 +1,4 @@
-> **Modèle de fiche TP.** Copiez ce fichier sous le nom `README.md` dans un nouveau dossier `TPxx-nom/` (avec un sous-dossier `images/`) : les liens fonctionnent une fois le fichier copié.
+> **Modèle de fiche TP.** Copiez ce fichier sous le nom `README.md` dans un nouveau dossier `TPxx-nom/` (avec les sous-dossiers `images/`, `videos/` et `data/`) : les liens fonctionnent une fois le fichier copié.
 
 [Formation](../../../README.md) › [5 · Tests du capteur](../README.md) › TPxx
 
