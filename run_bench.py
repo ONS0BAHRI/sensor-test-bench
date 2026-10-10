@@ -52,6 +52,16 @@ def run_campaign(args) -> int:
         sensor_kwargs = dict(DEFECTIVE_SENSOR) if args.defective else {}
         if args.serial and not args.defective:
             sensor_kwargs["serial_number"] = args.serial
+        # Réglages du simulateur pour les exercices : chaque défaut peut être modifié séparément
+        if args.noise is not None:
+            sensor_kwargs["noise_std_g"] = args.noise
+        if args.offset_x is not None:
+            base = sensor_kwargs.get("offset_g", (0.035, -0.020, 0.060))
+            sensor_kwargs["offset_g"] = (args.offset_x, base[1], base[2])
+        if args.backlash is not None:
+            sensor_kwargs["backlash_deg"] = args.backlash
+        if args.seed is not None:
+            sensor_kwargs["seed"] = args.seed
     elif args.serial:
         sensor_kwargs["serial_number"] = args.serial
 
@@ -130,6 +140,10 @@ def main() -> None:
     p.add_argument("--port", help="port série de l'ESP32 en mode hil (COM3, /dev/ttyUSB0...)")
     p.add_argument("--serial", help="numéro de série du capteur testé")
     p.add_argument("--defective", action="store_true", help="(sil) simule un capteur hors tolérances")
+    p.add_argument("--noise", type=float, help="(sil) bruit du capteur simulé en g (défaut 0.004)")
+    p.add_argument("--offset-x", type=float, help="(sil) offset de l'axe X en g (défaut 0.035)")
+    p.add_argument("--backlash", type=float, help="(sil) jeu mécanique du servo en degrés (défaut 0.4)")
+    p.add_argument("--seed", type=int, help="(sil) graine du générateur de bruit")
     p.add_argument("--limits", default="config/limits.yaml")
     p.add_argument("--out", default="reports")
     p.add_argument("--no-plots", action="store_true")

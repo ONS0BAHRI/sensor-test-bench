@@ -145,6 +145,9 @@ pip install -r requirements.txt
 | `pytest` | 44 tests : unitaires, protocole série, système |
 | `pytest --mode hil --port COM3` | la suite système sur le vrai matériel |
 | `python tools/live_plot.py` | affichage en direct pour filmer la démo |
+| `python run_bench.py --noise 0.012` | simulateur réglable : `--noise`, `--offset-x`, `--backlash`, `--seed` |
+| `python tools/compare_campaigns.py <campagne A> <campagne B>` | graphiques superposés simulation / réel et tableau des écarts |
+| `python tools/teststand_steps.py` | fonctions de mesure appelables depuis NI TestStand |
 
 **Firmware :** ouvrir `firmware/sensor_bench/sensor_bench.ino` dans l'IDE Arduino, installer le support ESP32 et la bibliothèque **ESP32Servo**, téléverser. Le moniteur série (921600 bauds) accepte directement les commandes du protocole :
 
@@ -276,7 +279,11 @@ Le firmware stocke d'abord toute l'acquisition en mémoire puis l'envoie : l'éc
 
 ### 7.13 Résultats sur le vrai capteur (HIL)
 
-> **[À compléter après la campagne sur le matériel]** : remplir ce tableau avec `reports/<campagne>/summary.md`, ajouter les graphiques réels (`python run_bench.py --mode hil --port COM3 --docs` les copie dans `docs/images/hil/`) et commenter les écarts avec la simulation.
+> **[À compléter après la campagne sur le matériel]** :
+>
+> 1. `python run_bench.py --mode hil --port COM3 --docs` copie les graphiques réels dans `docs/images/hil/`.
+> 2. `python tools/compare_campaigns.py reports/<campagne_sil> reports/<campagne_hil> --out docs/images/comparaison` produit le tableau `comparaison.md` et les graphiques superposés.
+> 3. Remplir le tableau ci-dessous et commenter chaque écart.
 
 | ID | Simulation (SIL) | Vrai capteur (HIL) | Commentaire |
 |---|---|---|---|
@@ -307,6 +314,10 @@ Le banc rend le verdict **KO · CAPTEUR NON CONFORME** et nomme les trois tests 
 | ![T03 défectueux](docs/images/defective/T03.png) | ![T05 défectueux](docs/images/defective/T05.png) |
 
 ---
+
+### 7.14 Les mêmes TP en MATLAB
+
+Le dossier [`matlab/`](matlab/A_LIRE.md) refait T03, T04 et T07 en MATLAB (ou GNU Octave) à partir des mêmes CSV. Deux outils différents doivent donner les mêmes chiffres : c'est une vérification croisée du traitement du signal.
 
 ## 9. Automatisation et intégration continue
 
@@ -357,7 +368,11 @@ sensor-test-bench/
 ├── firmware/sensor_bench/    # firmware ESP32 (Arduino)
 ├── config/limits.yaml        # seuils et paramètres
 ├── tests/                    # 44 tests pytest + faux ESP32
-├── tools/live_plot.py        # affichage en direct pour la démo
+├── tools/
+│   ├── live_plot.py          # affichage en direct pour la démo
+│   ├── compare_campaigns.py  # comparaison simulation / réel
+│   └── teststand_steps.py    # étapes appelables depuis NI TestStand
+├── matlab/                   # TP T03, T04, T07 en MATLAB / Octave
 ├── docs/                     # images, exemples de rapports, médias, plan
 ├── .github/workflows/ci.yml  # intégration continue
 └── run_bench.py              # campagne complète en une commande
@@ -385,6 +400,7 @@ sensor-test-bench/
 - [x] Firmware ESP32 et protocole série, testé contre un faux ESP32
 - [x] Intégration continue GitHub Actions
 - [ ] Campagne complète sur le vrai matériel, photos et vidéo
+- [ ] Carte PCB d'accueil (Proteus) : alimentation séparée servo / vibreur, connecteurs, 8 points de test
 
 **Version 2**
 - [ ] IA : détection d'anomalies (Isolation Forest) puis classification des défauts (Random Forest), avec précision, rappel et matrice de confusion
