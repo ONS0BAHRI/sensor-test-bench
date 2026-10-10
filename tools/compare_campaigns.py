@@ -1,7 +1,7 @@
 """Compare deux campagnes (typiquement simulation vs vrai capteur) sur les mêmes graphiques.
 
     python tools/compare_campaigns.py reports/<campagne_sil> reports/<campagne_hil>
-    python tools/compare_campaigns.py A B --labels "Simulation" "Capteur réel" --out docs/images/comparaison
+    python tools/compare_campaigns.py A B --labels "Simulation" "Capteur réel" --out formation/08-simulation-vs-reel/resultats
 
 Lit les fichiers results.json et les CSV bruts de chaque campagne, puis produit :
 - comparaison.md : tableau des mesures clés côte à côte, avec l'écart ;
@@ -130,7 +130,7 @@ def main():
     p.add_argument("campaign_a", type=Path)
     p.add_argument("campaign_b", type=Path)
     p.add_argument("--labels", nargs=2, default=["Simulation", "Capteur réel"])
-    p.add_argument("--out", type=Path, default=Path("docs/images/comparaison"))
+    p.add_argument("--out", type=Path, default=Path("formation/08-simulation-vs-reel/resultats"))
     args = p.parse_args()
     cams = [load_campaign(args.campaign_a), load_campaign(args.campaign_b)]
     args.out.mkdir(parents=True, exist_ok=True)

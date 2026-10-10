@@ -5,6 +5,7 @@ Exemples :
     python run_bench.py --defective                   # simulation d'un capteur défectueux
     python run_bench.py --mode hil --port COM3        # vrai banc ESP32 + MPU6050
     python run_bench.py --mode hil --port /dev/ttyUSB0 --serial MPU-0002
+    python run_bench.py --mode hil --port COM3 --docs   # range les graphiques dans les TP
 
 Produit dans reports/<campagne>/ : données brutes CSV, graphiques PNG, results.json,
 summary.md et un rapport HTML autonome. Chaque campagne est aussi ajoutée à reports/results.db.
@@ -25,6 +26,7 @@ import yaml
 
 from bench import open_bench
 from bench.procedures import ALL_PROCEDURES, TestResult
+from report.course import tp_image_path
 from report.database import save_campaign
 from report.html_report import write_html_report
 from report.plots import plot_result
@@ -106,10 +108,13 @@ def run_campaign(args) -> int:
     save_campaign(ROOT / args.out / "results.db", meta, results)
 
     if args.docs and figures:
-        dest = ROOT / "docs" / "images" / ("defective" if args.defective else args.mode)
-        dest.mkdir(parents=True, exist_ok=True)
-        for tid, p in figures.items():
-            shutil.copy(p, dest / p.name)
+        variant = "defectueux" if args.defective else args.mode
+        for tid, src in figures.items():
+            dest = tp_image_path(tid, variant)
+            if dest is not None:
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy(src, dest)
+        print(f"Graphiques copiés dans les dossiers des TP (images/{variant}.png)")
 
     failed = [r for r in results if not r.passed]
     print()
@@ -147,7 +152,7 @@ def main() -> None:
     p.add_argument("--limits", default="config/limits.yaml")
     p.add_argument("--out", default="reports")
     p.add_argument("--no-plots", action="store_true")
-    p.add_argument("--docs", action="store_true", help="copie les graphiques dans docs/images pour le README")
+    p.add_argument("--docs", action="store_true", help="copie chaque graphique dans le dossier de son TP (formation/05-tests-du-capteur)")
     sys.exit(run_campaign(p.parse_args()))
 
 
